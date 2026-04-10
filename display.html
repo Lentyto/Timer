@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pro Presentation Timer — Display Mode">
+    <title>ProTimer — Display</title>
+    <link rel="stylesheet" href="shared.css">
+    <link rel="stylesheet" href="display.css">
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+    <div class="display-container">
+        <div class="timer-display">
+
+            <!-- LEFT PANEL: Total timer with color bg -->
+            <div id="panelLeft" class="panel-left cue-blue">
+                <span class="panel-label">Total Time</span>
+                <div class="timer-block">
+                    <div class="timer-block-label">Elapsed</div>
+                    <div id="totalElapsed" class="time-elapsed">00:00.00</div>
+                </div>
+                <div class="timer-block">
+                    <div class="timer-block-label">Remaining</div>
+                    <div id="totalRemaining" class="time-remaining">03:30.00</div>
+                </div>
+                <div id="totalCue" class="total-cue">● PLENTY OF TIME</div>
+            </div>
+
+            <!-- RIGHT PANEL: Section timer with color bg -->
+            <div id="panelRight" class="panel-right cue-blue">
+                <span id="sectionIndicator" class="section-indicator">Section 1 of 3</span>
+                <div id="sectionName" class="section-name">Introduction</div>
+                <div id="sectionTime" class="section-time">02:00.00</div>
+                <div id="cueText" class="cue-text">● PLENTY OF TIME</div>
+            </div>
+
+        </div>
+
+        <div class="status-bar">
+            <div class="status-item">
+                <span id="statusDot" class="status-dot waiting"></span>
+                <span id="statusText">Waiting for controller…</span>
+            </div>
+            <div class="status-item">
+                PID: <strong id="pidLabel">—</strong>
+            </div>
+        </div>
+    </div>
+
+    <!-- FLASH SYNC OVERLAY -->
+    <div id="flashOverlay" class="flash-overlay"></div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="timer-engine.js"></script>
+    <script src="supabase-client.js"></script>
+    <script src="display.js"></script>
+</body>
+
+</html>

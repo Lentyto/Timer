@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="Pro Presentation Timer — Controller">
+    <title>ProTimer — Control</title>
+    <link rel="stylesheet" href="shared.css">
+    <link rel="stylesheet" href="control.css">
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+</head>
+
+<body class="control-body">
+
+    <div class="control-container">
+
+        <!-- HEADER -->
+        <div class="ctrl-header">
+            <div class="logo-sm">
+                <div class="ico">⏱</div>
+                Pro<span>Timer</span>
+            </div>
+            <div class="pid-display">PID: <span id="pidLabel">—</span></div>
+        </div>
+
+        <!-- MINI STATUS -->
+        <div class="ctrl-status">
+            <div class="time-mini">
+                <div class="lbl">Total</div>
+                <div id="miniTotal" class="val">00:00.00</div>
+            </div>
+            <span id="sectionBadge" class="section-badge">1 / 3</span>
+            <div class="time-mini">
+                <div class="lbl">Section</div>
+                <div id="miniSection" class="val">02:00.00</div>
+            </div>
+        </div>
+
+        <div id="ctrlSectionName" class="ctrl-section-name">Introduction</div>
+
+        <!-- CONTROL BUTTONS -->
+        <div class="ctrl-grid">
+            <button id="btnStart" class="ctrl-btn btn-start" onclick="toggleTimer()">
+                <span class="ctrl-icon">▶</span>
+                <span id="btnStartLabel">Start</span>
+            </button>
+            <button class="ctrl-btn btn-next" onclick="nextSection()">
+                <span class="ctrl-icon">⏭</span>
+                Next
+            </button>
+            <button class="ctrl-btn btn-prev" onclick="prevSection()">
+                <span class="ctrl-icon">⏮</span>
+                Previous
+            </button>
+            <button class="ctrl-btn btn-reset" onclick="resetTimer()">
+                <span class="ctrl-icon">🔄</span>
+                Reset
+            </button>
+        </div>
+
+        <!-- ACTIONS -->
+        <div class="ctrl-actions">
+            <button class="btn btn-secondary" onclick="openSettings()">⚙ Edit</button>
+            <button class="btn btn-secondary" onclick="saveCurrentConfig()">💾 Save</button>
+            <button class="btn btn-secondary" onclick="pingSync()">📡 Sync</button>
+        </div>
+
+        <!-- SAVED CONFIGS -->
+        <div class="saved-section">
+            <h3>Saved Timers</h3>
+            <div id="savedList" class="saved-list">
+                <div class="empty-state">No saved timers yet</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- SETTINGS OVERLAY -->
+    <div id="settingsOverlay" class="settings-overlay">
+        <div class="settings-panel">
+            <h2>⚙ Edit Sections</h2>
+            <p class="subtitle">Configure sections and their durations</p>
+            <div id="sectionList" class="section-list"></div>
+            <button id="btnAddSection" class="btn-add" onclick="addSection()">+ Add Section</button>
+            <div class="settings-actions">
+                <button class="btn btn-secondary" onclick="closeSettings()">Cancel</button>
+                <button class="btn btn-primary" onclick="saveSettings()">Save & Apply</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SAVE DIALOG -->
+    <div id="saveOverlay" class="settings-overlay">
+        <div class="settings-panel" style="max-width:380px">
+            <h2>💾 Save Timer Config</h2>
+            <p class="subtitle">Give this timer configuration a name</p>
+            <div style="margin-bottom:1.2rem">
+                <input id="saveNameInput" type="text" class="input" placeholder="e.g. English ISU Presentation"
+                    value="">
+            </div>
+            <div class="settings-actions">
+                <button class="btn btn-secondary" onclick="closeSaveDialog()">Cancel</button>
+                <button class="btn btn-primary" onclick="confirmSave()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="timer-engine.js"></script>
+    <script src="supabase-client.js"></script>
+    <script src="control.js"></script>
+</body>
+
+</html>

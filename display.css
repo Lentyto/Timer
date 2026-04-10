@@ -1,0 +1,217 @@
+/* ===== DISPLAY MODE STYLES ===== */
+.display-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+
+.timer-display {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+}
+
+/* ===== LEFT PANEL ===== */
+.panel-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: var(--transition-color);
+    background-color: var(--color-blue);
+}
+
+.panel-left .panel-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 2rem;
+}
+
+.panel-left .timer-block {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.panel-left .timer-block-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.55);
+    margin-bottom: 0.35rem;
+}
+
+.panel-left .time-elapsed {
+    font-family: var(--font-mono);
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    transition: color 0.4s ease;
+    line-height: 1.1;
+}
+
+.panel-left .time-remaining {
+    font-family: var(--font-mono);
+    font-size: 5rem;
+    font-weight: 900;
+    color: #fff;
+    transition: color 0.4s ease;
+    line-height: 1.1;
+    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+}
+
+.panel-left .time-remaining.overtime {
+    color: #000;
+    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+}
+
+.panel-left .time-elapsed.overtime {
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.panel-left .total-cue {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-top: 1.5rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* ===== RIGHT PANEL ===== */
+.panel-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: var(--transition-color);
+    background-color: var(--color-blue);
+}
+
+/* Divider line between panels */
+.panel-right::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 5%;
+    bottom: 5%;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.panel-right .section-indicator {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 0.5rem;
+}
+
+.panel-right .section-name {
+    font-size: 1.7rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #fff;
+    text-align: center;
+    padding: 0 1rem;
+}
+
+.panel-right .section-time {
+    font-family: var(--font-mono);
+    font-size: 6.5rem;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    transition: color 0.4s ease;
+}
+
+.panel-right .section-time.overtime {
+    color: #000;
+    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+}
+
+.panel-right .cue-text {
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-top: 1.2rem;
+    color: rgba(255, 255, 255, 0.8);
+    transition: color 0.4s ease;
+}
+
+.panel-right .cue-text.overtime {
+    color: rgba(0, 0, 0, 0.7);
+}
+
+/* ===== STATUS BAR ===== */
+.status-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 0.7rem 2rem;
+    background: var(--color-surface);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 0.72rem;
+    color: var(--color-text-dim);
+}
+
+.status-bar .status-item {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.status-bar .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-green);
+}
+
+.status-bar .status-dot.waiting {
+    background: var(--color-orange);
+    animation: blink 1.5s ease-in-out infinite;
+}
+
+.status-bar .status-dot.disconnected {
+    background: var(--color-red);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+    .timer-display {
+        flex-direction: column;
+    }
+
+    .panel-left .time-remaining {
+        font-size: 3.2rem;
+    }
+
+    .panel-left .time-elapsed {
+        font-size: 1.8rem;
+    }
+
+    .panel-right .section-time {
+        font-size: 3.8rem;
+    }
+
+    .panel-right .section-name {
+        font-size: 1.2rem;
+    }
+
+    .panel-right::before {
+        display: none;
+    }
+}

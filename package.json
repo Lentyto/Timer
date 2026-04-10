@@ -1,0 +1,9 @@
+{
+  "name": "presentation-timer-pro",
+  "version": "1.0.0",
+  "description": "Multi-device presentation timer with Supabase real-time sync",
+  "private": true,
+  "scripts": {
+    "build": "node build.js"
+  }
+}    

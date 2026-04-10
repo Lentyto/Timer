@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="Pro Presentation Timer — Teacher View">
+    <title>ProTimer — Teacher</title>
+    <link rel="stylesheet" href="shared.css">
+    <link rel="stylesheet" href="teacher.css">
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+</head>
+
+<body class="teacher-body">
+
+    <div class="teacher-container">
+
+        <!-- TOP BAR -->
+        <div class="teacher-top">
+            <div class="tt-logo">
+                <div class="ico">⏱</div>
+                Pro<span>Timer</span>
+            </div>
+            <div class="tt-total">
+                <div class="tt-label">Total Elapsed</div>
+                <div id="ttElapsed" class="tt-value">00:00.00</div>
+            </div>
+            <div class="tt-remaining">
+                <div class="tt-label">Remaining</div>
+                <div id="ttRemaining" class="tt-value">03:30.00</div>
+            </div>
+        </div>
+
+        <!-- SECTION AREA -->
+        <div id="teacherSection" class="teacher-section cue-blue">
+            <span id="tsIndicator" class="ts-indicator">Section 1 of 3</span>
+            <div id="tsName" class="ts-name">Introduction</div>
+            <div id="tsTime" class="ts-time">02:00.00</div>
+            <div id="tsCue" class="ts-cue">● PLENTY OF TIME</div>
+        </div>
+
+        <!-- STATUS -->
+        <div class="teacher-status">
+            <span id="tsDot" class="sd waiting"></span>
+            <span id="tsStatus">Waiting for controller…</span>
+        </div>
+
+    </div>
+
+    <!-- FLASH SYNC OVERLAY -->
+    <div id="flashOverlay" class="flash-overlay"></div>
+
+    <script src="timer-engine.js"></script>
+    <script src="supabase-client.js"></script>
+    <script src="teacher.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="description" content="Presentation Timer Pro — Multi-device Sync">
+  <title>Presentation Timer Pro</title>
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: radial-gradient(ellipse at 30% 20%, rgba(124, 92, 252, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 80%, rgba(30, 136, 229, 0.06) 0%, transparent 50%),
+        var(--color-dark);
+      overflow: auto;
+    }
+
+    .join-card {
+      background: var(--color-surface);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 2.8rem;
+      width: 92%;
+      max-width: 420px;
+      animation: slideUp 0.5s ease-out;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .join-card .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 1.8rem;
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .join-card .ico {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #7c5cfc, #1e88e5);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+    }
+
+    .join-card .logo span {
+      color: var(--color-accent);
+    }
+
+    .join-card h1 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 0.35rem;
+    }
+
+    .join-card .sub {
+      font-size: 0.82rem;
+      color: var(--color-text-dim);
+      margin-bottom: 1.8rem;
+      line-height: 1.5;
+    }
+
+    .input-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .input-group label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--color-text-dim);
+      margin-bottom: 0.5rem;
+    }
+
+    .input-wrapper input {
+      width: 100%;
+      font-size: 1.6rem;
+      padding: 0.8rem 1rem;
+      letter-spacing: 6px;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-sm);
+      color: white;
+      box-sizing: border-box;
+    }
+
+    .mode-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.6rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .mode-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1.1rem 0.5rem;
+      border-radius: var(--radius-md);
+      border: 2px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--color-text-dim);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      font-family: var(--font-sans);
+    }
+
+    .mode-btn:hover {
+      border-color: rgba(124, 92, 252, 0.4);
+      background: rgba(124, 92, 252, 0.06);
+      color: #fff;
+    }
+
+    .mode-btn.selected {
+      border-color: var(--color-accent);
+      background: rgba(124, 92, 252, 0.12);
+      color: #fff;
+      box-shadow: 0 0 20px rgba(124, 92, 252, 0.15);
+    }
+
+    .mode-btn .mode-icon {
+      font-size: 1.6rem;
+    }
+
+    .mode-btn .mode-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .btn-join {
+      width: 100%;
+      padding: 0.9rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .btn-join:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
+    .error-text {
+      color: var(--color-red);
+      font-size: 0.78rem;
+      margin-top: 0.5rem;
+      display: none;
+    }
+
+    .offline-note {
+      margin-top: 1.2rem;
+      padding: 0.7rem 1rem;
+      background: rgba(239, 108, 0, 0.1);
+      border: 1px solid rgba(239, 108, 0, 0.2);
+      border-radius: var(--radius-sm);
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.7);
+      display: none;
+    }
+
+    .offline-note.show {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="join-card">
+    <div class="logo">
+      <div class="ico">⏱</div>
+      Presentation Timer <span>Pro</span>
+    </div>
+
+    <h1>Join Session</h1>
+    <p class="sub">Enter your Presenter ID to connect. Choose your view mode below.</p>
+
+    <div class="input-group">
+      <label>PRESENTER ID (PID)</label>
+      <div class="input-wrapper">
+        <input type="text" id="pidInput" placeholder="PID here" maxlength="10" autocomplete="off" autocorrect="off"
+          autocapitalize="off" spellcheck="false">
+      </div>
+      <div id="errorText" class="error-text"></div>
+    </div>
+
+    <label
+      style="display:block;font-size:0.72rem;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:var(--color-text-dim);margin-bottom:0.6rem;">Select
+      Mode</label>
+    <div class="mode-grid">
+      <button class="mode-btn" data-mode="display" onclick="selectMode('display')">
+        <span class="mode-icon">🖥️</span>
+        <span class="mode-label">Display</span>
+      </button>
+      <button class="mode-btn" data-mode="control" onclick="selectMode('control')">
+        <span class="mode-icon">🎮</span>
+        <span class="mode-label">Control</span>
+      </button>
+      <button class="mode-btn" data-mode="teacher" onclick="selectMode('teacher')">
+        <span class="mode-icon">👁️</span>
+        <span class="mode-label">Teacher</span>
+      </button>
+    </div>
+
+    <button id="btnJoin" class="btn btn-primary btn-join" disabled onclick="joinSession()">
+      Connect →
+    </button>
+
+    <div id="offlineNote" class="offline-note">
+      ⚡ Running in offline mode — Supabase is not configured. Multi-device sync will be simulated via localStorage. All
+      modes still work locally.
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="supabase-client.js"></script>
+  <script>
+    let selectedMode = null;
+
+    function selectMode(mode) {
+      selectedMode = mode;
+      document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('selected'));
+      document.querySelector(`[data-mode="${mode}"]`).classList.add('selected');
+      validate();
+    }
+
+    function validate() {
+      const pid = document.getElementById('pidInput').value.trim();
+      const valid = pid.length > 0 && selectedMode;
+      document.getElementById('btnJoin').disabled = !valid;
+      return valid;
+    }
+
+    function showError(msg) {
+      const el = document.getElementById('errorText');
+      el.textContent = msg;
+      el.style.display = msg ? 'block' : 'none';
+    }
+
+    function joinSession() {
+      const pid = document.getElementById('pidInput').value.trim();
+      if (!pid) { showError('Please enter your PID'); return; }
+      if (!selectedMode) { showError('Please select a mode'); return; }
+
+      sessionStorage.setItem('pid', pid);
+      sessionStorage.setItem('mode', selectedMode);
+
+      window.location.href = `${selectedMode}.html`;
+    }
+
+    document.getElementById('pidInput').addEventListener('input', () => {
+      showError('');
+      validate();
+    });
+
+    document.getElementById('pidInput').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && validate()) joinSession();
+    });
+
+    // Check Supabase config
+    if (!SupaClient.isConfigured()) {
+      document.getElementById('offlineNote').classList.add('show');
+    }
+
+    // Auto-fill if returning
+    const savedPid = sessionStorage.getItem('pid');
+    if (savedPid) {
+      document.getElementById('pidInput').value = savedPid;
+      validate();
+    }
+  </script>
+</body>
+
+</html>

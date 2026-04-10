@@ -1,0 +1,178 @@
+/* ===== TEACHER VIEW STYLES ===== */
+body.teacher-body {
+    overflow: hidden;
+    min-height: 100vh;
+}
+
+.teacher-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* ===== TOP BAR: Total elapsed ===== */
+.teacher-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.8rem 1.2rem;
+    background: var(--color-surface);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    flex-shrink: 0;
+}
+
+.teacher-top .tt-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.teacher-top .tt-logo .ico {
+    width: 24px;
+    height: 24px;
+    background: linear-gradient(135deg, #7c5cfc, #1e88e5);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+}
+
+.teacher-top .tt-logo span {
+    color: var(--color-accent);
+}
+
+.teacher-top .tt-total {
+    text-align: center;
+}
+
+.teacher-top .tt-label {
+    font-size: 0.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--color-text-dim);
+}
+
+.teacher-top .tt-value {
+    font-family: var(--font-mono);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #fff;
+    transition: color 0.4s ease;
+}
+
+.teacher-top .tt-value.overtime {
+    color: var(--color-red);
+}
+
+.teacher-top .tt-remaining {
+    text-align: right;
+}
+
+.teacher-top .tt-remaining .tt-value {
+    font-size: 1.1rem;
+}
+
+/* ===== SECTION AREA (color bg) ===== */
+.teacher-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-color);
+    background-color: var(--color-blue);
+    position: relative;
+}
+
+.teacher-section .ts-indicator {
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: rgba(255, 255, 255, 0.55);
+    margin-bottom: 0.4rem;
+}
+
+.teacher-section .ts-name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    color: #fff;
+    text-align: center;
+    padding: 0 1rem;
+}
+
+.teacher-section .ts-time {
+    font-family: var(--font-mono);
+    font-size: 5rem;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+    text-shadow: 0 3px 20px rgba(0, 0, 0, 0.2);
+    transition: color 0.4s ease;
+}
+
+.teacher-section .ts-time.overtime {
+    color: #000;
+    text-shadow: 0 3px 20px rgba(0, 0, 0, 0.1);
+}
+
+.teacher-section .ts-cue {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-top: 0.8rem;
+    color: rgba(255, 255, 255, 0.75);
+    transition: color 0.4s ease;
+}
+
+.teacher-section .ts-cue.overtime {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+/* ===== STATUS BAR ===== */
+.teacher-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: var(--color-surface);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 0.65rem;
+    color: var(--color-text-dim);
+    flex-shrink: 0;
+}
+
+.teacher-status .sd {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-green);
+}
+
+.teacher-status .sd.waiting {
+    background: var(--color-orange);
+    animation: blink 1.5s ease-in-out infinite;
+}
+
+.teacher-status .sd.disconnected {
+    background: var(--color-red);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-height: 500px) {
+    .teacher-section .ts-time {
+        font-size: 3.5rem;
+    }
+
+    .teacher-section .ts-name {
+        font-size: 1rem;
+    }
+}
